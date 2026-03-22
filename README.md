@@ -2,7 +2,7 @@
 
 Fast, reliable screenshots and PDFs from any URL or HTML. One API call, instant results.
 
-**[Get your free API key →](https://snapapi.dev)** | **[API Docs →](https://snapapi.dev/docs)**
+**[Get your free API key →](https://api.unstableentity.com)** | **[API Docs →](https://api.unstableentity.com/docs)**
 
 ## Why SnapAPI?
 
@@ -16,19 +16,19 @@ Fast, reliable screenshots and PDFs from any URL or HTML. One API call, instant 
 
 ```bash
 # 1. Get your free API key
-curl -X POST https://snapapi.dev/v1/keys \
+curl -X POST https://api.unstableentity.com/v1/keys \
   -H "Content-Type: application/json" \
   -d '{"email": "you@example.com"}'
 
 # 2. Take a screenshot
-curl -X POST https://snapapi.dev/v1/screenshot \
+curl -X POST https://api.unstableentity.com/v1/screenshot \
   -H "Authorization: Bearer snap_your_key_here" \
   -H "Content-Type: application/json" \
   -d '{"url": "https://example.com"}' \
   -o screenshot.png
 
 # 3. Generate a PDF
-curl -X POST https://snapapi.dev/v1/pdf \
+curl -X POST https://api.unstableentity.com/v1/pdf \
   -H "Authorization: Bearer snap_your_key_here" \
   -H "Content-Type: application/json" \
   -d '{"url": "https://example.com"}' \
@@ -100,7 +100,7 @@ headers = {
 }
 
 # Screenshot
-resp = requests.post("https://snapapi.dev/v1/screenshot", headers=headers, json={
+resp = requests.post("https://api.unstableentity.com/v1/screenshot", headers=headers, json={
     "url": "https://github.com",
     "width": 1280,
     "height": 720,
@@ -113,7 +113,7 @@ with open("github.png", "wb") as f:
 ### JavaScript (Node.js)
 
 ```javascript
-const response = await fetch("https://snapapi.dev/v1/screenshot", {
+const response = await fetch("https://api.unstableentity.com/v1/screenshot", {
   method: "POST",
   headers: {
     "Authorization": "Bearer snap_your_key_here",
@@ -134,7 +134,7 @@ fs.writeFileSync("github.png", Buffer.from(buffer));
 ### HTML to PDF (Invoice Example)
 
 ```bash
-curl -X POST https://snapapi.dev/v1/pdf \
+curl -X POST https://api.unstableentity.com/v1/pdf \
   -H "Authorization: Bearer snap_your_key_here" \
   -H "Content-Type: application/json" \
   -d '{
