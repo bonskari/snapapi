@@ -9,7 +9,7 @@
     <meta property="og:title" content="SnapAPI — Screenshot & PDF API">
     <meta property="og:description" content="Capture any URL or HTML as PNG, JPEG, or PDF. One API call, instant results.">
     <meta property="og:type" content="website">
-    <link rel="canonical" href="https://snapapi.dev">
+    <link rel="canonical" href="https://api.unstableentity.com">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -266,14 +266,14 @@
         <div class="container">
             <div class="code-block">
 <pre><span class="comment"># Take a screenshot</span>
-<span class="cmd">curl</span> -X POST https://snapapi.dev/v1/screenshot \
+<span class="cmd">curl</span> -X POST https://api.unstableentity.com/v1/screenshot \
   -H <span class="string">"Authorization: Bearer snap_your_key"</span> \
   -H <span class="string">"Content-Type: application/json"</span> \
   -d <span class="string">'{"url": "https://example.com"}'</span> \
   -o screenshot.png
 
 <span class="comment"># Generate a PDF</span>
-<span class="cmd">curl</span> -X POST https://snapapi.dev/v1/pdf \
+<span class="cmd">curl</span> -X POST https://api.unstableentity.com/v1/pdf \
   -H <span class="string">"Authorization: Bearer snap_your_key"</span> \
   -H <span class="string">"Content-Type: application/json"</span> \
   -d <span class="string">'{"url": "https://example.com"}'</span> \
@@ -414,7 +414,7 @@
     <script>
         const API_BASE = window.location.hostname === 'localhost'
             ? 'http://localhost:8910'
-            : 'https://snapapi.dev';
+            : 'https://api.unstableentity.com';
 
         document.getElementById('key-form').addEventListener('submit', async (e) => {
             e.preventDefault();
