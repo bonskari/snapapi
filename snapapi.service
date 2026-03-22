@@ -1,0 +1,16 @@
+[Unit]
+Description=SnapAPI - Screenshot & PDF Generation API
+After=network.target
+
+[Service]
+Type=simple
+User=b1s
+WorkingDirectory=/home/b1s/github/money-maker/projects/screenshot-api
+ExecStart=/usr/bin/python3 /home/b1s/github/money-maker/projects/screenshot-api/app.py
+Restart=always
+RestartSec=5
+Environment=SNAPAPI_PORT=8910
+Environment=SNAPAPI_DATA_DIR=/home/b1s/github/money-maker/projects/screenshot-api/data
+
+[Install]
+WantedBy=multi-user.target
