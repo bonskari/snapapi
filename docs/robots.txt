@@ -1,0 +1,28 @@
+# SnapAPI - Screenshot & PDF API
+# https://bonskari.github.io/snapapi/
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /?*
+Disallow: /*?*
+
+# Specific search engine directives
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Crawl delay and request rate (in seconds)
+User-agent: *
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://bonskari.github.io/snapapi/sitemap.xml
