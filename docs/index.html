@@ -9,7 +9,7 @@
     <meta property="og:title" content="SnapAPI — Screenshot & PDF API">
     <meta property="og:description" content="Capture any URL or HTML as PNG, JPEG, or PDF. One API call, instant results.">
     <meta property="og:type" content="website">
-    <link rel="canonical" href="https://bonskari.github.io/snapapi/">
+    <link rel="canonical" href="https://usesnapapi.com">
     <link rel="sitemap" type="application/xml" href="/snapapi/sitemap.xml">
     <script type="application/ld+json">
     {
@@ -25,7 +25,7 @@
         {"@type": "Offer", "price": "29", "priceCurrency": "USD", "name": "Pro - 25,000 captures/month"},
         {"@type": "Offer", "price": "79", "priceCurrency": "USD", "name": "Business - 100,000 captures/month"}
       ],
-      "url": "https://bonskari.github.io/snapapi/"
+      "url": "https://usesnapapi.com"
     }
     </script>
     <style>
@@ -285,14 +285,14 @@
         <div class="container">
             <div class="code-block">
 <pre><span class="comment"># Take a screenshot</span>
-<span class="cmd">curl</span> -X POST https://api.unstableentity.com/v1/screenshot \
+<span class="cmd">curl</span> -X POST https://api.usesnapapi.com/v1/screenshot \
   -H <span class="string">"Authorization: Bearer snap_your_key"</span> \
   -H <span class="string">"Content-Type: application/json"</span> \
   -d <span class="string">'{"url": "https://example.com"}'</span> \
   -o screenshot.png
 
 <span class="comment"># Generate a PDF</span>
-<span class="cmd">curl</span> -X POST https://api.unstableentity.com/v1/pdf \
+<span class="cmd">curl</span> -X POST https://api.usesnapapi.com/v1/pdf \
   -H <span class="string">"Authorization: Bearer snap_your_key"</span> \
   -H <span class="string">"Content-Type: application/json"</span> \
   -d <span class="string">'{"url": "https://example.com"}'</span> \
@@ -476,7 +476,7 @@
     <script>
         const API_BASE = window.location.hostname === 'localhost'
             ? 'http://localhost:8910'
-            : 'https://api.unstableentity.com';
+            : 'https://api.usesnapapi.com';
 
         document.getElementById('key-form').addEventListener('submit', async (e) => {
             e.preventDefault();
