@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Take Website Screenshots with an API in 2026 - SnapAPI</title>
+    <meta name="description" content="Learn how to capture website screenshots programmatically using SnapAPI. Code examples in Python, JavaScript, cURL. Free tier with 500 screenshots/month.">
+    <meta name="keywords" content="screenshot API, website screenshot, URL to image, capture webpage, screenshot service, web screenshot API">
+    <link rel="canonical" href="https://usesnapapi.com/blog/how-to-take-website-screenshots-with-api.html">
+    <meta property="og:title" content="How to Take Website Screenshots with an API in 2026">
+    <meta property="og:description" content="Step-by-step guide to capturing website screenshots programmatically. Code examples in Python, JavaScript, and cURL.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://usesnapapi.com/blog/how-to-take-website-screenshots-with-api.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Take Website Screenshots with an API in 2026",
+      "datePublished": "2026-03-23",
+      "author": {"@type": "Organization", "name": "SnapAPI"},
+      "publisher": {"@type": "Organization", "name": "SnapAPI"}
+    }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #1e293b; line-height: 1.8; background: #f8fafc; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+        header { padding: 16px 0; border-bottom: 1px solid #e2e8f0; background: white; }
+        header .inner { max-width: 720px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: #1e293b; text-decoration: none; }
+        .logo span { color: #6366f1; }
+        header nav a { color: #64748b; text-decoration: none; margin-left: 24px; font-size: 0.9rem; }
+        article { padding: 48px 0; }
+        h1 { font-size: 2.2rem; font-weight: 800; line-height: 1.3; margin-bottom: 16px; }
+        .meta { color: #64748b; margin-bottom: 40px; font-size: 0.9rem; }
+        h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 16px; }
+        h3 { font-size: 1.2rem; font-weight: 600; margin: 32px 0 12px; }
+        p { margin-bottom: 16px; color: #334155; }
+        pre { background: #0f172a; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 16px 0 24px; font-size: 0.85rem; line-height: 1.7; }
+        code { font-family: 'SF Mono', 'Fira Code', monospace; }
+        .inline-code { background: #f1f5f9; color: #6366f1; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        ul, ol { margin: 0 0 16px 24px; color: #334155; }
+        li { margin-bottom: 8px; }
+        .cta { background: #6366f1; color: white; text-align: center; padding: 40px; border-radius: 12px; margin: 48px 0; }
+        .cta h2 { color: white; margin: 0 0 12px; }
+        .cta p { color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+        .cta a { display: inline-block; background: white; color: #6366f1; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .cta a:hover { background: #f1f5f9; }
+        footer { padding: 32px 0; text-align: center; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid #e2e8f0; }
+        footer a { color: #94a3b8; text-decoration: none; }
+        @media (max-width: 640px) { h1 { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="inner">
+            <a href="/" class="logo">Snap<span>API</span></a>
+            <nav>
+                <a href="/#demo">Demo</a>
+                <a href="/#pricing">Pricing</a>
+                <a href="https://api.usesnapapi.com/docs">API Docs</a>
+            </nav>
+        </div>
+    </header>
+
+    <article>
+        <div class="container">
+            <h1>How to Take Website Screenshots with an API in 2026</h1>
+            <p class="meta">Published March 23, 2026 &middot; 5 min read</p>
+
+            <p>Need to capture website screenshots programmatically? Whether you're building social media preview images, generating PDF reports, or doing visual regression testing, a screenshot API saves you from running your own browser infrastructure.</p>
+
+            <p>In this guide, we'll show you how to capture pixel-perfect screenshots using <strong>SnapAPI</strong> with code examples in cURL, Python, and JavaScript.</p>
+
+            <h2>Why Use a Screenshot API?</h2>
+
+            <p>Running headless browsers (Puppeteer, Playwright, Selenium) yourself means:</p>
+            <ul>
+                <li>Managing browser installations and updates</li>
+                <li>Handling memory leaks and zombie processes</li>
+                <li>Scaling infrastructure for concurrent requests</li>
+                <li>Dealing with timeouts, crashes, and edge cases</li>
+            </ul>
+
+            <p>A screenshot API handles all of this. You send a URL, you get an image back. That's it.</p>
+
+            <h2>Quick Start: Your First Screenshot in 30 Seconds</h2>
+
+            <h3>1. Get a Free API Key</h3>
+
+<pre><code>curl -X POST https://api.usesnapapi.com/v1/keys \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com"}'</code></pre>
+
+            <p>This gives you an API key instantly. No credit card, no signup form. 500 free screenshots per month.</p>
+
+            <h3>2. Capture a Screenshot</h3>
+
+<pre><code>curl -X POST https://api.usesnapapi.com/v1/screenshot \
+  -H "Authorization: Bearer snap_your_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://github.com"}' \
+  -o screenshot.png</code></pre>
+
+            <p>That's it. You now have a 1280x720 PNG screenshot of GitHub.</p>
+
+            <h2>Python Example</h2>
+
+<pre><code>import requests
+
+API_KEY = "snap_your_key_here"
+API_URL = "https://api.usesnapapi.com/v1/screenshot"
+
+response = requests.post(API_URL,
+    headers={
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    },
+    json={
+        "url": "https://news.ycombinator.com",
+        "width": 1280,
+        "height": 720,
+        "full_page": False
+    }
+)
+
+with open("screenshot.png", "wb") as f:
+    f.write(response.content)
+
+print(f"Screenshot saved! ({len(response.content)} bytes)")</code></pre>
+
+            <h2>JavaScript / Node.js Example</h2>
+
+<pre><code>const fs = require('fs');
+
+async function takeScreenshot(url) {
+  const response = await fetch('https://api.usesnapapi.com/v1/screenshot', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer snap_your_key_here',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      url,
+      width: 1280,
+      height: 720,
+      format: 'png'
+    })
+  });
+
+  const buffer = Buffer.from(await response.arrayBuffer());
+  fs.writeFileSync('screenshot.png', buffer);
+  console.log(`Screenshot saved! (${buffer.length} bytes)`);
+}
+
+takeScreenshot('https://news.ycombinator.com');</code></pre>
+
+            <h2>Advanced Options</h2>
+
+            <h3>Full-Page Screenshots</h3>
+            <p>Capture the entire scrollable page, not just the viewport:</p>
+<pre><code>{
+  "url": "https://example.com",
+  "full_page": true
+}</code></pre>
+
+            <h3>Dark Mode</h3>
+            <p>Sites that support <span class="inline-code">prefers-color-scheme</span> will render in dark mode:</p>
+<pre><code>{
+  "url": "https://github.com",
+  "dark_mode": true
+}</code></pre>
+
+            <h3>Retina / HiDPI</h3>
+            <p>Get crystal-clear 2x or 3x resolution screenshots:</p>
+<pre><code>{
+  "url": "https://example.com",
+  "device_scale_factor": 2.0
+}</code></pre>
+
+            <h3>Element Capture</h3>
+            <p>Capture a specific element on the page using CSS selectors:</p>
+<pre><code>{
+  "url": "https://example.com",
+  "selector": "#main-content"
+}</code></pre>
+
+            <h3>HTML to Screenshot</h3>
+            <p>Render your own HTML instead of a URL — perfect for generating OG images, reports, or receipts:</p>
+<pre><code>{
+  "html": "&lt;div style='padding:40px;background:#6366f1;color:white;font-size:48px'&gt;Hello World&lt;/div&gt;",
+  "width": 1200,
+  "height": 630
+}</code></pre>
+
+            <h2>Generate PDFs Too</h2>
+            <p>SnapAPI also converts any URL or HTML to PDF:</p>
+<pre><code>curl -X POST https://api.usesnapapi.com/v1/pdf \
+  -H "Authorization: Bearer snap_your_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://example.com",
+    "format": "A4",
+    "print_background": true
+  }' \
+  -o output.pdf</code></pre>
+
+            <h2>Common Use Cases</h2>
+            <ol>
+                <li><strong>Social media previews</strong> — Generate OG images dynamically for your pages</li>
+                <li><strong>Invoice generation</strong> — HTML template to PDF in one API call</li>
+                <li><strong>Visual regression testing</strong> — Compare screenshots before and after deployments</li>
+                <li><strong>Web archiving</strong> — Capture pages for compliance or records</li>
+                <li><strong>Dashboard reports</strong> — Convert dashboards to PDF for stakeholders</li>
+                <li><strong>E-commerce</strong> — Product page screenshots for marketplaces</li>
+            </ol>
+
+            <div class="cta">
+                <h2>Ready to start?</h2>
+                <p>Get 500 free screenshots per month. No credit card required.</p>
+                <a href="/#get-started">Get Your Free API Key</a>
+            </div>
+
+            <h2>Pricing</h2>
+            <p>SnapAPI is free to start. Paid plans scale with your usage:</p>
+            <ul>
+                <li><strong>Free</strong> — 500 screenshots/month, all features</li>
+                <li><strong>Starter ($9/mo)</strong> — 5,000 screenshots/month</li>
+                <li><strong>Pro ($29/mo)</strong> — 25,000 screenshots/month</li>
+                <li><strong>Business ($79/mo)</strong> — 100,000 screenshots/month</li>
+            </ul>
+
+            <p>Compare that to ScreenshotOne ($17/mo for 1,500), Urlbox ($99/mo), or running your own Puppeteer infrastructure.</p>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p><a href="/">SnapAPI</a> &middot; <a href="https://github.com/bonskari/snapapi">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>
