@@ -184,7 +184,7 @@ def verify_api_key(authorization: Optional[str]) -> dict:
 
     allowed, usage, limit = increment_usage(key)
     if not allowed:
-        raise HTTPException(429, f"Rate limit exceeded. Used {usage}/{limit} this month. Upgrade at https://snapapi.dev/pricing")
+        raise HTTPException(429, f"Rate limit exceeded. Used {usage}/{limit} this month. Upgrade at https://api.unstableentity.com/pricing")
 
     return data
 
@@ -343,6 +343,74 @@ async def generate_pdf(req: PDFRequest, authorization: str = Header(None)):
         raise
     except Exception as e:
         raise HTTPException(500, f"PDF generation failed: {str(e)}")
+
+@app.get("/pricing")
+async def pricing():
+    """View available plans and upgrade links."""
+    return {
+        "plans": [
+            {
+                "tier": "free",
+                "price": "$0/mo",
+                "limit": "500 screenshots/month",
+                "features": ["PNG & JPEG screenshots", "PDF generation", "Custom viewport sizes"],
+            },
+            {
+                "tier": "starter",
+                "price": "$9/mo",
+                "limit": "5,000 screenshots/month",
+                "features": ["Everything in Free", "Priority rendering", "Email support"],
+                "checkout_url": "https://buy.stripe.com/test_4gM5kFfKfb1N1kMf1fafS00",
+            },
+            {
+                "tier": "pro",
+                "price": "$29/mo",
+                "limit": "25,000 screenshots/month",
+                "features": ["Everything in Starter", "Full-page captures", "Webhook notifications"],
+                "checkout_url": "https://buy.stripe.com/test_00weVf55B0n97Jaf1fafS01",
+            },
+            {
+                "tier": "business",
+                "price": "$79/mo",
+                "limit": "100,000 screenshots/month",
+                "features": ["Everything in Pro", "Dedicated support", "Custom integrations"],
+                "checkout_url": "https://buy.stripe.com/test_3cI6oJ1Tp3zl4wYaKZafS02",
+            },
+        ]
+    }
+
+@app.post("/webhooks/stripe")
+async def stripe_webhook(request: Request):
+    """Handle Stripe webhook events for subscription management."""
+    payload = await request.body()
+    sig_header = request.headers.get("stripe-signature", "")
+
+    # For now, just log the event
+    try:
+        event = json.loads(payload)
+        event_type = event.get("type", "")
+
+        if event_type == "checkout.session.completed":
+            session = event.get("data", {}).get("object", {})
+            customer_email = session.get("customer_details", {}).get("email", "")
+            # Find API key by email and upgrade tier
+            keys = load_keys()
+            for k, v in keys.items():
+                if v.get("email") == customer_email:
+                    # Determine tier from the price
+                    amount = session.get("amount_total", 0)
+                    if amount >= 7900:
+                        v["tier"] = "business"
+                    elif amount >= 2900:
+                        v["tier"] = "pro"
+                    elif amount >= 900:
+                        v["tier"] = "starter"
+                    save_keys(keys)
+                    break
+
+        return {"status": "ok"}
+    except Exception as e:
+        raise HTTPException(400, f"Webhook error: {str(e)}")
 
 @app.get("/health")
 async def health():

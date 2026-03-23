@@ -165,6 +165,7 @@ python app.py
 | `/v1/pdf` | POST | Generate PDF |
 | `/v1/keys` | POST | Create free API key |
 | `/v1/usage` | GET | Check usage & limits |
+| `/pricing` | GET | View plans & upgrade links |
 | `/health` | GET | Service health check |
 | `/docs` | GET | Interactive API docs (Swagger) |
 
