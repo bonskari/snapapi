@@ -261,6 +261,7 @@
         <div class="container">
             <a href="/" class="logo">Snap<span>API</span></a>
             <div>
+                <a href="#demo">Live Demo</a>
                 <a href="#features">Features</a>
                 <a href="#pricing">Pricing</a>
                 <a href="/docs">API Docs</a>
@@ -296,6 +297,49 @@
   -H <span class="string">"Content-Type: application/json"</span> \
   -d <span class="string">'{"url": "https://example.com"}'</span> \
   -o output.pdf</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" style="padding: 80px 0; border-top: 1px solid var(--border);">
+        <div class="container" style="max-width: 800px;">
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 12px;">Try it live</h2>
+            <p style="text-align: center; color: var(--muted); margin-bottom: 40px;">Enter any URL and see SnapAPI in action. No API key needed for this demo.</p>
+            <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                <input type="url" id="demo-url" placeholder="https://example.com" value="https://github.com" style="
+                    flex: 1;
+                    padding: 14px 16px;
+                    border-radius: 8px;
+                    border: 1px solid var(--border);
+                    background: var(--surface);
+                    color: var(--text);
+                    font-size: 1rem;
+                    outline: none;
+                ">
+                <select id="demo-format" style="
+                    padding: 14px 16px;
+                    border-radius: 8px;
+                    border: 1px solid var(--border);
+                    background: var(--surface);
+                    color: var(--text);
+                    font-size: 1rem;
+                    outline: none;
+                    cursor: pointer;
+                ">
+                    <option value="png">PNG</option>
+                    <option value="jpeg">JPEG</option>
+                </select>
+                <button id="demo-btn" class="btn btn-primary" style="white-space: nowrap; border: none; cursor: pointer;" onclick="runDemo()">Capture</button>
+            </div>
+            <div id="demo-status" style="text-align: center; color: var(--muted); margin-bottom: 16px; display: none;"></div>
+            <div id="demo-result" style="display: none;">
+                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center;">
+                    <img id="demo-img" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border);" alt="Screenshot result">
+                    <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <span id="demo-meta" style="color: var(--muted); font-size: 0.85rem;"></span>
+                        <a id="demo-download" download="screenshot.png" class="btn btn-secondary" style="padding: 8px 20px; font-size: 0.85rem;">Download</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -456,6 +500,73 @@
                 btn.disabled = false;
             }
         });
+
+        // Demo API key for live demo
+        let demoKey = null;
+
+        async function getDemoKey() {
+            if (demoKey) return demoKey;
+            const resp = await fetch(`${API_BASE}/v1/keys`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: 'demo@usesnapapi.com' })
+            });
+            const data = await resp.json();
+            demoKey = data.api_key;
+            return demoKey;
+        }
+
+        async function runDemo() {
+            const url = document.getElementById('demo-url').value.trim();
+            if (!url) return;
+            const format = document.getElementById('demo-format').value;
+            const btn = document.getElementById('demo-btn');
+            const status = document.getElementById('demo-status');
+            const result = document.getElementById('demo-result');
+
+            btn.textContent = 'Capturing...';
+            btn.disabled = true;
+            status.style.display = 'block';
+            status.textContent = 'Launching browser and rendering page...';
+            result.style.display = 'none';
+            const start = Date.now();
+
+            try {
+                const key = await getDemoKey();
+                const resp = await fetch(`${API_BASE}/v1/screenshot`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${key}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url, format, width: 1280, height: 720 })
+                });
+
+                if (!resp.ok) {
+                    const err = await resp.json();
+                    throw new Error(err.detail || 'Screenshot failed');
+                }
+
+                const blob = await resp.blob();
+                const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+                const sizeKB = (blob.size / 1024).toFixed(0);
+                const imgUrl = URL.createObjectURL(blob);
+
+                document.getElementById('demo-img').src = imgUrl;
+                document.getElementById('demo-meta').textContent = `${sizeKB} KB \u00b7 ${elapsed}s \u00b7 1280\u00d7720 \u00b7 ${format.toUpperCase()}`;
+                document.getElementById('demo-download').href = imgUrl;
+                document.getElementById('demo-download').download = `screenshot.${format}`;
+                result.style.display = 'block';
+                status.style.display = 'none';
+                btn.textContent = 'Capture';
+                btn.disabled = false;
+            } catch (err) {
+                status.textContent = 'Error: ' + err.message;
+                status.style.color = '#ef4444';
+                btn.textContent = 'Capture';
+                btn.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
