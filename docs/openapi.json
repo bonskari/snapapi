@@ -5,7 +5,7 @@
     "description": "Fast, reliable screenshot and PDF generation API. Capture any URL or HTML as PNG, JPEG, or PDF with one API call.",
     "version": "1.0.0",
     "contact": {
-      "email": "kai@unstableentity.com",
+      "email": "hello@usesnapapi.com",
       "url": "https://bonskari.github.io/snapapi/"
     },
     "license": {
@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://api.unstableentity.com",
+      "url": "https://api.usesnapapi.com",
       "description": "Production"
     }
   ],

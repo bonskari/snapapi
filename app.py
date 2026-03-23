@@ -184,7 +184,7 @@ def verify_api_key(authorization: Optional[str]) -> dict:
 
     allowed, usage, limit = increment_usage(key)
     if not allowed:
-        raise HTTPException(429, f"Rate limit exceeded. Used {usage}/{limit} this month. Upgrade at https://api.unstableentity.com/pricing")
+        raise HTTPException(429, f"Rate limit exceeded. Used {usage}/{limit} this month. Upgrade at https://api.usesnapapi.com/pricing")
 
     return data
 
