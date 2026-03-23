@@ -1,0 +1,156 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SnapAPI",
+    "description": "Fast, reliable screenshot and PDF generation API. Capture any URL or HTML as PNG, JPEG, or PDF with one API call.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "kai@unstableentity.com",
+      "url": "https://bonskari.github.io/snapapi/"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.unstableentity.com",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/v1/screenshot": {
+      "post": {
+        "summary": "Capture a screenshot",
+        "description": "Take a screenshot of any URL or HTML content. Returns PNG or JPEG image.",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {"type": "string", "description": "URL to capture"},
+                  "html": {"type": "string", "description": "Raw HTML to render"},
+                  "width": {"type": "integer", "default": 1280, "minimum": 320, "maximum": 3840},
+                  "height": {"type": "integer", "default": 720, "minimum": 200, "maximum": 2160},
+                  "full_page": {"type": "boolean", "default": false},
+                  "format": {"type": "string", "enum": ["png", "jpeg"], "default": "png"},
+                  "quality": {"type": "integer", "default": 90, "minimum": 1, "maximum": 100},
+                  "delay": {"type": "integer", "default": 0, "minimum": 0, "maximum": 10000},
+                  "selector": {"type": "string"},
+                  "dark_mode": {"type": "boolean", "default": false},
+                  "device_scale_factor": {"type": "number", "default": 1.0, "minimum": 0.5, "maximum": 3.0}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Screenshot image",
+            "content": {
+              "image/png": {},
+              "image/jpeg": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/pdf": {
+      "post": {
+        "summary": "Generate a PDF",
+        "description": "Convert any URL or HTML content to PDF.",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {"type": "string"},
+                  "html": {"type": "string"},
+                  "format": {"type": "string", "enum": ["A4", "Letter", "Legal", "A3"], "default": "A4"},
+                  "landscape": {"type": "boolean", "default": false},
+                  "print_background": {"type": "boolean", "default": true},
+                  "margin_top": {"type": "string", "default": "20px"},
+                  "margin_bottom": {"type": "string", "default": "20px"},
+                  "margin_left": {"type": "string", "default": "20px"},
+                  "margin_right": {"type": "string", "default": "20px"},
+                  "delay": {"type": "integer", "default": 0}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PDF document",
+            "content": {
+              "application/pdf": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/keys": {
+      "post": {
+        "summary": "Create a free API key",
+        "description": "Get a free API key with 500 screenshots/month.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email"],
+                "properties": {
+                  "email": {"type": "string", "format": "email"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "API key created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "api_key": {"type": "string"},
+                    "tier": {"type": "string"},
+                    "monthly_limit": {"type": "integer"},
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/usage": {
+      "get": {
+        "summary": "Check usage",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {
+            "description": "Usage information"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
